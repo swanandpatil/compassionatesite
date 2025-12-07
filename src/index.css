@@ -28,6 +28,12 @@ body {
   place-items: center;
   min-width: 320px;
   min-height: 100vh;
+  body {
+  margin: 0;
+  background-color: #fff7e0; /* light peach */
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
 }
 
 h1 {

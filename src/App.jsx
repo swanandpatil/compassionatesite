@@ -1,61 +1,255 @@
+// src/App.jsx
+import { useState } from "react";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Link,
+  Navigate,
+} from "react-router-dom";
+import AuthBar from "./AuthBar";
+import Home from "./pages/Home";
+import Journal from "./pages/Journal";
 
+const whatsappNutritionistLink =
+  "https://chat.whatsapp.com/IXGIiz3MKFALOlmsjm9rvm";
 
-import './App.css';
-import journalCover from './assets/journal-cover.png';
+// separate challenge group link for paid users
+const challengeGroupLink =
+  "https://chat.whatsapp.com/REPLACE_WITH_CHALLENGE_GROUP_LINK";
 
 function App() {
+  // UI login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  // Has the user paid for gratitude pass?
+  const [hasPass, setHasPass] = useState(false);
+
   return (
-    <div className="compassionate-container">
-      <header className="compassionate-header">
-        <div className="logo-title">
-          <span className="logo-icon">{/* Heart/leaf icon SVG here */}</span>
-          <span className="site-title">The Compassionate</span>
+    <BrowserRouter>
+      {/* Header / Navbar */}
+      <header
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          borderBottom: "1px solid #eee",
+          maxWidth: "1120px",
+          margin: "0 auto",
+          padding: "1rem 1.5rem",
+          gap: "0.75rem",
+        }}
+      >
+        {/* Top row: logo + nav + auth */}
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          {/* Left: Logo + Brand */}
+          <div style={{ display: "flex", alignItems: "center", gap: "0.5rem" }}>
+            <img
+              src="/compassionate-logo.png"
+              alt="The Compassionate logo"
+              style={{ width: 28, height: 28 }}
+            />
+            <Link
+              to="/"
+              style={{
+                fontWeight: 700,
+                fontSize: "1.1rem",
+                textDecoration: "none",
+                color: "black",
+              }}
+            >
+              The Compassionate
+            </Link>
+          </div>
+
+          {/* Center: Navigation items */}
+          <nav
+            style={{
+              display: "flex",
+              gap: "1.0rem",
+              fontSize: "0.95rem",
+              alignItems: "center",
+              flexWrap: "wrap",
+            }}
+          >
+            {/* Home – always enabled */}
+            <Link
+              to="/"
+              style={{
+                textDecoration: "none",
+                color: "black",
+                fontSize: "0.95rem",
+              }}
+            >
+              Home
+            </Link>
+
+            {/* Journal – enabled only when logged in */}
+            {isLoggedIn ? (
+              <Link
+                to="/journal"
+                style={{
+                  textDecoration: "none",
+                  color: "black",
+                  fontSize: "0.95rem",
+                }}
+              >
+                Journal
+              </Link>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Login to unlock Journal access"
+                style={{
+                  padding: "0.25rem 0.75rem",
+                  borderRadius: "999px",
+                  border: "1px solid #e5e7eb",
+                  background: "#f5f5f5",
+                  fontSize: "0.9rem",
+                  opacity: 0.6,
+                  cursor: "not-allowed",
+                }}
+              >
+                Journal
+              </button>
+            )}
+
+            {/* WhatsApp Nutritionist – enabled only when logged in */}
+            {isLoggedIn ? (
+              <a
+                href={whatsappNutritionistLink}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: "none",
+                  padding: "0.35rem 0.85rem",
+                  borderRadius: "999px",
+                  border: "1px solid #22c55e",
+                  background: "#e9ffef",
+                  fontSize: "0.9rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                WhatsApp Nutritionist
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Login to unlock WhatsApp Nutritionist access"
+                style={{
+                  padding: "0.35rem 0.85rem",
+                  borderRadius: "999px",
+                  border: "1px solid #e5e7eb",
+                  background: "#f5f5f5",
+                  fontSize: "0.9rem",
+                  cursor: "not-allowed",
+                  opacity: 0.6,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                WhatsApp Nutritionist
+              </button>
+            )}
+
+            {/* NEW: Challenge Group – only for paid Gratitude Pass users */}
+            {hasPass ? (
+              <a
+                href={challengeGroupLink}
+                target="_blank"
+                rel="noreferrer"
+                style={{
+                  textDecoration: "none",
+                  padding: "0.35rem 0.85rem",
+                  borderRadius: "999px",
+                  border: "1px solid #3b82f6",
+                  background: "#eff6ff",
+                  fontSize: "0.9rem",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "0.35rem",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                21-Day Challenge Group
+              </a>
+            ) : (
+              <button
+                type="button"
+                disabled
+                title="Unlock the ₹99 Gratitude Pass to join the Challenge Group"
+                style={{
+                  padding: "0.35rem 0.85rem",
+                  borderRadius: "999px",
+                  border: "1px solid #e5e7eb",
+                  background: "#f5f5f5",
+                  fontSize: "0.9rem",
+                  cursor: "not-allowed",
+                  opacity: 0.6,
+                  whiteSpace: "nowrap",
+                }}
+              >
+                21-Day Challenge Group
+              </button>
+            )}
+          </nav>
+
+          {/* Right: Auth controls */}
+          <AuthBar
+            onLogin={() => setIsLoggedIn(true)}
+            onLogout={() => {
+              setIsLoggedIn(false);
+              // Optional: lock the pass again on logout
+              // setHasPass(false);
+            }}
+          />
         </div>
-        <nav className="main-nav">
-          <a href="#journal">Journal</a>
-          <a href="#whatsapp">WhatsApp Nutritionist</a>
-        </nav>
       </header>
-      <main className="main-content">
-        <div className="journal-section">
-          <img src={journalCover} alt="Journal Cover" className="journal-cover" />
-          <div className="journal-info">
-            <h1 className="main-heading">Live Compassionately.<br />Eat Kindly.<br />Reflect Daily.</h1>
-            <div className="main-buttons">
-              <button className="download-btn">Download Journal</button>
-              <button className="pass-btn">₹99 Gratitdte Pass</button>
-            </div>
-            <div className="hindi-heading">करुणा से जियें</div>
-          </div>
-        </div>
-        <div className="chance-section">
-          <h2>Stand a chance to win your own vegan cloud kitchen setup — and start your compassionate food journey</h2>
-          <div className="chance-buttons">
-            <button className="outline-btn">Cloud Kitchen Setup</button>
-            <button className="outline-btn">Training by Vegan Chef</button>
-            <button className="outline-btn">Launch Support</button>
-          </div>
-        </div>
-      </main>
-      <footer className="compassionate-footer">
-        <div className="footer-main">
-          <h2 className="footer-heading">Stay Compassionate <span className="green-heart">💚</span></h2>
-          <div className="footer-sub">Reflect daily. Eat mindfully.<br />Made in India with Compassion for the World</div>
-        </div>
-        <div className="footer-links">
-          <div className="footer-col">
-            <span className="footer-title">About</span>
-          </div>
-          <div className="footer-col">
-            <span className="footer-title">Quick Links</span>
-          </div>
-          <div className="footer-col">
-            <span className="footer-title">Contact info</span>
-            <div>thecompassionate@gmail.com<br />Pune, India</div>
-          </div>
-        </div>
+
+      {/* Routes */}
+      <Routes>
+        <Route
+          path="/"
+          element={
+            <Home
+              hasPass={hasPass}
+              onBuyPass={() => setHasPass(true)}
+            />
+          }
+        />
+        <Route
+          path="/journal"
+          element={isLoggedIn ? <Journal /> : <Navigate to="/" replace />}
+        />
+      </Routes>
+
+      {/* Footer with करुणा से जीएं at end */}
+      <footer
+        style={{
+          borderTop: "1px solid #eee",
+          padding: "1rem 1.5rem",
+          textAlign: "center",
+          fontSize: "0.85rem",
+          opacity: 0.8,
+          marginTop: "2rem",
+        }}
+      >
+        © {new Date().getFullYear()} The Compassionate Journal · Eat Kindly, Live
+        Compassionately · करुणा से जीएं
       </footer>
-    </div>
+    </BrowserRouter>
   );
 }
 
