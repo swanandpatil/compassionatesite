@@ -1,6 +1,12 @@
 // src/pages/Home.jsx   
+// src/pages/Home.jsx
+
+import { useAuth } from "../AuthContext";
+import { Link } from "react-router-dom";
 
 export default function Home({ hasPass, onBuyPass }) {
+  const { user } = useAuth();
+
   const handleDownloadJournal = () => {
     if (!hasPass) return;
     // TODO: replace with your actual journal file download
@@ -34,6 +40,51 @@ export default function Home({ hasPass, onBuyPass }) {
         padding: "3rem 1.5rem",
       }}
     >
+      {/* ✅ Login banner at top of Home (only when NOT logged in) */}
+      {!user && (
+        <div
+          style={{
+            maxWidth: "1120px",
+            margin: "0 auto 1.5rem",
+            padding: "0.9rem 1.2rem",
+            borderRadius: "0.75rem",
+            border: "1px solid #fde68a",
+            backgroundColor: "#fffbeb",
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            gap: "1rem",
+            flexWrap: "wrap",
+          }}
+        >
+          <p
+            style={{
+              margin: 0,
+              fontWeight: 600,
+              fontSize: "0.98rem",
+            }}
+          >
+            Login to unlock <strong>Journal</strong> &{" "}
+            <strong>WhatsApp Nutritionist</strong> access.
+          </p>
+          <Link
+            to="/login"
+            style={{
+              padding: "0.45rem 1.2rem",
+              borderRadius: "999px",
+              border: "none",
+              background: "#111827",
+              color: "#f9fafb",
+              fontWeight: 600,
+              textDecoration: "none",
+              whiteSpace: "nowrap",
+            }}
+          >
+            Login
+          </Link>
+        </div>
+      )}
+
       {/* Main container */}
       <div
         style={{
