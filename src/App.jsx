@@ -9,7 +9,7 @@ import {
 } from "react-router-dom";
 import AuthBar from "./AuthBar";
 import Home from "./pages/Home";
-import Journal from "./pages/Journal";
+import Journal from "./pages/journal";
 
 const whatsappNutritionistLink =
   "https://chat.whatsapp.com/IXGIiz3MKFALOlmsjm9rvm";

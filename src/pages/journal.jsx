@@ -1,8 +1,6 @@
-
-// src/pages/Journal.jsx
+// src/pages/journal.jsx
 import { useAuth } from "../AuthContext";
-import Journal from "./pages/journal";
-
+import JournalPage from "../JournalPage";
 
 export default function Journal() {
   const { user } = useAuth();
