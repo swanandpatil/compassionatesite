@@ -57,16 +57,7 @@ export default function Home({ hasPass, onBuyPass }) {
             flexWrap: "wrap",
           }}
         >
-          <p
-            style={{
-              margin: 0,
-              fontWeight: 600,
-              fontSize: "0.98rem",
-            }}
-          >
-            Login to unlock <strong>Journal</strong> &{" "}
-            <strong>WhatsApp Nutritionist</strong> access.
-          </p>
+         
           <Link
             to="/login"
             style={{
