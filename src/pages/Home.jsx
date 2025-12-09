@@ -41,40 +41,8 @@ export default function Home({ hasPass, onBuyPass }) {
       }}
     >
       {/* ✅ Login banner at top of Home (only when NOT logged in) */}
-      {!user && (
-        <div
-          style={{
-            maxWidth: "1120px",
-            margin: "0 auto 1.5rem",
-            padding: "0.9rem 1.2rem",
-            borderRadius: "0.75rem",
-            border: "1px solid #fde68a",
-            backgroundColor: "#fffbeb",
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            gap: "1rem",
-            flexWrap: "wrap",
-          }}
-        >
-         
-          <Link
-            to="/login"
-            style={{
-              padding: "0.45rem 1.2rem",
-              borderRadius: "999px",
-              border: "none",
-              background: "#111827",
-              color: "#f9fafb",
-              fontWeight: 600,
-              textDecoration: "none",
-              whiteSpace: "nowrap",
-            }}
-          >
-            Login
-          </Link>
-        </div>
-      )}
+     
+    
 
       {/* Main container */}
       <div
