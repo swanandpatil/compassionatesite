@@ -1,279 +1,112 @@
-// src/pages/Home.jsx   
-// src/pages/Home.jsx
-
-import { useAuth } from "../AuthContext";
+import React from "react";
 import { Link } from "react-router-dom";
 
-export default function Home({ hasPass, onBuyPass }) {
-  const { user } = useAuth();
-
-  const handleDownloadJournal = () => {
-    if (!hasPass) return;
-    // TODO: replace with your actual journal file download
-    // e.g., window.open("/compassionate-journal.pdf", "_blank");
-    alert(
-      "Journal download coming soon (you've unlocked it with Gratitude Pass)!"
-    );
-  };
-
-  const handleBuyPass = () => {
-    const confirmed = window.confirm(
-      "Proceed to unlock the ₹99 Gratitude Pass?\n(Payment flow coming soon – this is a demo unlock.)"
-    );
-    if (!confirmed) return;
-    onBuyPass && onBuyPass();
-  };
-
-  const handleChallengeGroup = () => {
-    if (!hasPass) return;
-    window.open(
-      "https://chat.whatsapp.com/REPLACE_WITH_CHALLENGE_GROUP_LINK",
-      "_blank"
-    );
-  };
-
+export default function Home() {
   return (
     <div
       style={{
+        minHeight: "calc(100vh - 80px)", // Adjust for navbar height
         background: "#fff7e0",
-        minHeight: "calc(100vh - 70px)",
-        padding: "3rem 1.5rem",
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+        padding: "2rem 1.5rem",
+        fontFamily: "Georgia, serif",
       }}
     >
-      {/* ✅ Login banner at top of Home (only when NOT logged in) */}
-     
-    
-
-      {/* Main container */}
       <div
         style={{
           maxWidth: "1120px",
-          margin: "0 auto",
+          width: "100%",
           display: "grid",
-          gridTemplateColumns: "minmax(0, 1fr) minmax(0, 1.3fr)",
-          gap: "2.5rem",
+          gridTemplateColumns: "minmax(0, 1fr) 1.2fr",
+          gap: "3rem",
           alignItems: "center",
         }}
       >
-        {/* Left section: Journal cover */}
-        <div>
-          <div
+        {/* Left section: Journal image */}
+        <div style={{ textAlign: "center" }}>
+          <img
+            src="/Journal.png"
+            alt="Journal"
             style={{
               width: "100%",
-              maxWidth: "320px",
+              maxWidth: "350px",
               borderRadius: "24px",
-              overflow: "hidden",
-              boxShadow: "0 18px 40px rgba(0,0,0,0.12)",
-              marginBottom: "1rem",
+              boxShadow: "0 18px 40px hsla(0, 0%, 0%, 0.12)",
             }}
-          >
-            <img
-              src="/journal-cover.png"
-              alt="The Compassionate Journal cover"
-              style={{
-                display: "block",
-                width: "100%",
-                height: "auto",
-              }}
-            />
-          </div>
-
-          <p
-            style={{
-              fontSize: "0.95rem",
-              maxWidth: "320px",
-              opacity: 0.9,
-            }}
-          >
-            <strong>The Compassionate Journal</strong> – 21-day guided reflection
-            to live compassionately, eat kindly and build a daily gratitude habit.
-          </p>
+          />
         </div>
 
-        {/* Right section */}
-        <div>
-          {/* Main heading */}
+        {/* Right section: Hero content */}
+        <div style={{ textAlign: "left" }}>
+          {/* Hero Heading */}
           <h1
             style={{
-              fontSize: "3.1rem",
-              lineHeight: 1.05,
-              marginBottom: "1.2rem",
+              fontSize: "3.2rem",
+              lineHeight: 1.1,
+              marginBottom: "1.5rem",
+              fontWeight: 400,
+              color: "#2d2a32",
             }}
           >
-            Live Compassionately.
+            Start 2026
             <br />
-            Eat Kindly.
+            with Clarity
             <br />
-            Reflect Daily.
+            and Calm
           </h1>
 
-          {/* Highlight text line */}
+          {/* Subtitle */}
           <p
             style={{
-              fontSize: "1.05rem",
-              fontWeight: 600,
-              lineHeight: 1.55,
-              marginBottom: "1.25rem",
-              maxWidth: "560px",
-              color: "#facc15", // yellow text highlight
-            }}
-          >
-            21 days of mindful eating, daily gratitude, and reflection – with a
-            chance to win a vegan cloud kitchen setup.
-          </p>
-
-          {/* Helper line about Gratitude Pass */}
-          <p
-            style={{
-              fontSize: "0.95rem",
+              fontSize: "1.25rem",
+              lineHeight: 1.6,
+              marginBottom: "2.5rem",
+              color: "#5b5663",
+              fontStyle: "italic",
               opacity: 0.9,
-              marginBottom: "1rem",
             }}
           >
-            <em>*Unlock your journal + 21-day challenge with the Gratitude Pass.</em>
+            3–4 minutes for daily reflection
+            <br />
+            14 days of guided journaling
           </p>
 
-          {/* Buttons */}
+          {/* CTA Button */}
+         <Link to="/journal-page" style={{ textDecoration: "none" }}>
+  <button
+    className="login-btn"
+    style={{
+      width: "auto",
+      padding: "0.9rem 2.2rem",
+      fontSize: "1.05rem",
+      borderRadius: "50px",
+      marginBottom: "3.5rem",
+      background: "#695099",          // ✅ purple
+      color: "white",                 // ✅ white text
+      border: "none",
+      cursor: "pointer",
+      boxShadow: "0 4px 15px rgba(109, 91, 208, 0.35)", // softer purple shadow
+    }}
+  >
+    Let’s Begin Day 1
+  </button>
+</Link>
+
+          {/* Brand Block – visible without scroll */}
           <div
             style={{
-              marginBottom: "2rem",
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "1rem",
-            }}
-          >
-            {/* Download Journal */}
-            <button
-              onClick={handleDownloadJournal}
-              disabled={!hasPass}
-              style={{
-                padding: "0.7rem 1.8rem",
-                borderRadius: "999px",
-                border: "none",
-                background: hasPass ? "#111827" : "#9ca3af",
-                color: "white",
-                fontWeight: 600,
-                cursor: hasPass ? "pointer" : "not-allowed",
-                opacity: hasPass ? 1 : 0.7,
-                whiteSpace: "nowrap",
-              }}
-            >
-              Download Journal
-            </button>
-
-            {/* Gratitude Pass */}
-            <button
-              type="button"
-              onClick={handleBuyPass}
-              style={{
-                padding: "0.7rem 1.8rem",
-                borderRadius: "999px",
-                background: hasPass ? "#dcfce7" : "#facc15",
-                color: "#111827",
-                fontWeight: 600,
-                cursor: "pointer",
-                border: hasPass ? "1px solid #111827" : "none",
-                whiteSpace: "nowrap",
-                transition: "all 0.15s ease",
-              }}
-            >
-              {hasPass ? "Gratitude Pass Unlocked ✅" : "₹99 Gratitude Pass"}
-            </button>
-
-            {/* Challenge Group */}
-            <button
-              type="button"
-              disabled={!hasPass}
-              onClick={handleChallengeGroup}
-              style={{
-                padding: "0.7rem 1.8rem",
-                borderRadius: "999px",
-                border: hasPass ? "1px solid #3b82f6" : "1px solid #e5e7eb",
-                background: hasPass ? "#eff6ff" : "#f5f5f5",
-                fontWeight: 600,
-                cursor: hasPass ? "pointer" : "not-allowed",
-                opacity: hasPass ? 1 : 0.6,
-                whiteSpace: "nowrap",
-              }}
-              title={
-                hasPass
-                  ? "Join the 21-Day Challenge Group"
-                  : "Unlock the ₹99 Gratitude Pass to access this"
-              }
-            >
-              21-Day Challenge Group
-            </button>
-          </div>
-
-          {/* Feature badges */}
-          <div
-            style={{
-              display: "flex",
-              flexWrap: "wrap",
-              gap: "0.75rem",
-              marginBottom: "2rem",
               fontSize: "0.9rem",
+              color: "rgba(91, 86, 99, 0.75)",
+              lineHeight: 1.6,
             }}
           >
-            {["Cloud Kitchen Setup", "Training by Vegan Chef", "Launch Support"].map(
-              (label) => (
-                <span
-                  key={label}
-                  style={{
-                    padding: "0.5rem 1.1rem",
-                    borderRadius: "999px",
-                    border: "1px solid #111827",
-                    background: "transparent",
-                    cursor: "default",
-                  }}
-                >
-                  {label}
-                </span>
-              )
-            )}
-          </div>
-
-          {/* Stay Compassionate + Hindi line */}
-          <div>
-            <h2
-              style={{
-                fontSize: "1.7rem",
-                marginBottom: "0.4rem",
-              }}
-            >
-              Stay Compassionate 💚
-            </h2>
-
-            {/* Hindi line - deep green */}
-            <p
-              style={{
-                marginBottom: "0.35rem",
-                fontSize: "1.1rem",
-                color: "#065f46", // 🌿 deep green
-                fontWeight: 600,
-              }}
-            >
-              करुणा से जीएं
-            </p>
-
-            {/* Instruction line */}
-            <p
-              style={{
-                marginBottom: "0.35rem",
-                fontSize: "1rem",
-              }}
-            >
-              Reflect daily. Eat mindfully.
-            </p>
-
-            {/* Signature line */}
-            <p
-              style={{
-                opacity: 0.6, // ✨ subtle signature style
-                fontSize: "0.9rem",
-              }}
-            >
-              Made in India with compassion for the world.
+            <p style={{ margin: 0 }}>Crafted in India</p>
+            <p style={{ margin: 0 }}>with compassion for the world</p>
+            <p style={{ margin: "0.3rem 0 0 0", fontWeight: 500 }}>
+              करुणा से जिएँ
             </p>
           </div>
         </div>

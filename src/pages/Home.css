@@ -1,0 +1,320 @@
+/* Home Page Styles - Matching The Compassionate Begin 2026 Journal Design */
+
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;600;700&family=Lato:wght@400;500&display=swap');
+
+.home-container {
+  min-height: calc(100vh - 70px);
+  padding: 2.5rem 1.5rem 3rem;
+  background: linear-gradient(135deg, #faf8f5 0%, #f5f2ed 50%, #efe9e3 100%);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background texture and leaf motifs matching Homepage.png */
+.home-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 85% 15%, rgba(139, 119, 101, 0.12) 0%, transparent 50%),
+    radial-gradient(circle at 15% 50%, rgba(160, 140, 120, 0.10) 0%, transparent 50%),
+    radial-gradient(circle at 90% 85%, rgba(139, 119, 101, 0.12) 0%, transparent 50%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Header */
+.home-header {
+  max-width: 1200px;
+  margin: 0 auto 4rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+.logo-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #faf8f5;
+  width: 100%;
+}
+
+.logo-full-image {
+  display: block;
+  max-width: 280px;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+/* Hero Section */
+.hero-section {
+  max-width: 1200px;
+  margin: -0.1in auto 5rem;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
+  gap: 4rem;
+  align-items: start;
+  position: relative;
+  z-index: 1;
+}
+
+/* Left Column - Call to Action */
+.hero-left {
+  display: flex;
+  flex-direction: column;
+}
+
+.hero-headline {
+  font-family: 'Playfair Display', serif;
+  font-size: 4.2rem;
+  line-height: 1.05;
+  margin-bottom: 0;
+  font-weight: 600;
+  letter-spacing: -0.03em;
+  color: #111827;
+}
+
+.hero-description {
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  color: #111827;
+  margin-bottom: 0.35rem;
+  line-height: 1.5;
+}
+
+.hero-description:first-of-type {
+  margin-top: 0;
+}
+
+.cta-button {
+  padding: 1rem 2.4rem;
+  border-radius: 6px;
+  border: none;
+  background: #2d5a4a;
+  color: white;
+  font-family: 'Lato', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 500;
+  cursor: pointer;
+  margin-top: 0;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+  align-self: center;
+  width: fit-content;
+}
+
+.cta-button:hover {
+  background: #1e3d32;
+  transform: translateY(-1px);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Right Column - Book Visual */
+.hero-right {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.book-container {
+  width: 100%;
+  max-width: 380px;
+  position: relative;
+}
+
+.book-image {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.15);
+}
+
+/* Middle Informational Section */
+.middle-section {
+  text-align: center;
+  margin-bottom: 4.5rem;
+  position: relative;
+  z-index: 1;
+}
+
+.middle-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 2rem;
+  color: #111827;
+  margin-bottom: 0.4rem;
+  line-height: 1.3;
+}
+
+.middle-text-hindi {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.75rem;
+  color: #111827;
+  margin-top: 0.5rem;
+}
+
+/* Footer decorative element */
+.home-footer::before {
+  content: "";
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+  width: 150px;
+  height: 100px;
+  background: 
+    radial-gradient(ellipse at 70% 30%, rgba(139, 119, 101, 0.15) 0%, transparent 40%),
+    radial-gradient(ellipse at 30% 70%, rgba(160, 140, 120, 0.12) 0%, transparent 40%),
+    radial-gradient(ellipse at 50% 50%, rgba(139, 119, 101, 0.08) 0%, transparent 50%);
+  border-radius: 50%;
+  opacity: 0.8;
+  transform: rotate(-15deg);
+}
+
+/* Footer Section */
+.home-footer {
+  border-top: 1px solid rgba(15, 23, 42, 0.08);
+  padding-top: 3rem;
+  position: relative;
+  z-index: 1;
+}
+
+.footer-content {
+  max-width: 1200px;
+  margin: 0 auto 2.5rem;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 3rem;
+}
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-heading {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: #111827;
+  margin-bottom: 0.85rem;
+}
+
+.footer-text {
+  font-family: 'Lato', sans-serif;
+  font-size: 0.9rem;
+  color: #111827;
+  margin-bottom: 0.3rem;
+  line-height: 1.5;
+}
+
+/* Bottom Left Brand Info */
+.footer-brand {
+  max-width: 1200px;
+  margin: 2.5rem auto 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  padding-bottom: 1.5rem;
+}
+
+.logo-heart-small {
+  flex-shrink: 0;
+  opacity: 0.9;
+}
+
+.footer-brand-text {
+  font-family: 'Playfair Display', serif;
+  font-size: 0.85rem;
+  color: #111827;
+  line-height: 1.4;
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .home-header {
+    margin-bottom: 3rem;
+  }
+
+  .hero-section {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+    margin-bottom: 4rem;
+  }
+
+  .hero-headline {
+    font-size: 3.2rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+
+  .middle-text {
+    font-size: 1.6rem;
+  }
+
+  .middle-text-hindi {
+    font-size: 1.4rem;
+  }
+
+  .middle-section {
+    margin-bottom: 3.5rem;
+  }
+}
+
+@media (max-width: 640px) {
+  .home-container {
+    padding: 2rem 1rem 2.5rem;
+  }
+
+  .home-header {
+    margin-bottom: 2.5rem;
+  }
+
+  .hero-section {
+    margin-bottom: 3.5rem;
+  }
+
+  .hero-headline {
+    font-size: 2.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .hero-description {
+    font-size: 0.95rem;
+  }
+
+  .cta-button {
+    padding: 0.85rem 2rem;
+    font-size: 1rem;
+    margin-top: 1.5rem;
+  }
+
+  .middle-text {
+    font-size: 1.4rem;
+  }
+
+  .middle-text-hindi {
+    font-size: 1.2rem;
+  }
+
+  .middle-section {
+    margin-bottom: 3rem;
+  }
+
+  .footer-content {
+    gap: 2rem;
+  }
+}
+

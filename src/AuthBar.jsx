@@ -1,102 +1,94 @@
-// src/AuthBar.jsx
 import { useState } from "react";
+import { useAuth } from "./AuthContext";
 import { supabase } from "./supabaseClient";
 
-export default function AuthBar({ onLogin, onLogout }) {
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
+export default function AuthBar() {
+  const { user, loading } = useAuth();
+  const [sending, setSending] = useState(false);
 
-  const handleLogin = async (e) => {
-    e.preventDefault();
-    setMessage("Sending magic link...");
+  const handleLogin = async () => {
+    const email = window.prompt("Enter your email to receive a magic login link:");
+    if (!email) return;
 
-    const { error } = await supabase.auth.signInWithOtp({
-      email,
-      options: {
-        emailRedirectTo: window.location.origin,
-      },
-    });
+    try {
+      setSending(true);
+      const { error } = await supabase.auth.signInWithOtp({
+        email,
+        options: {
+          emailRedirectTo: window.location.origin,
+        },
+      });
 
-    if (error) {
-      setMessage(error.message);
-    } else {
-      setMessage("Check your email for the login link ✉️");
-      // For UI purposes, treat this as "logged in" so buttons unlock
-      if (onLogin) onLogin();
+      if (error) {
+        // Very simple error handling
+        window.alert("Could not send magic link. Please try again.");
+        return;
+      }
+
+      window.alert("Magic login link sent! Please check your email.");
+    } finally {
+      setSending(false);
     }
   };
 
   const handleLogout = async () => {
     await supabase.auth.signOut();
-    setMessage("Logged out");
-    if (onLogout) onLogout();
   };
 
-  return (
-    <div style={{ display: "flex", flexDirection: "column", gap: "0.25rem" }}>
-      {/* TOP ROW: Login + Logout in one line */}
-      <div style={{ display: "flex", gap: "0.75rem", alignItems: "center" }}>
-        <form
-          onSubmit={handleLogin}
-          style={{ display: "flex", gap: "0.5rem", alignItems: "center" }}
-        >
-          <input
-            type="email"
-            placeholder="Enter email to login"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            style={{
-              padding: "0.35rem 0.7rem",
-              borderRadius: "999px",
-              border: "1px solid #ddd",
-            }}
-          />
-          <button
-            type="submit"
-            style={{
-              padding: "0.35rem 0.9rem",
-              borderRadius: "999px",
-              border: "none",
-              background: "black",
-              color: "white",
-              cursor: "pointer",
-            }}
-          >
-            Login
-          </button>
-        </form>
+  if (loading) {
+    return <span style={{ fontSize: "0.9rem" }}>Checking session…</span>;
+  }
 
-        <button
-          type="button"
-          onClick={handleLogout}
-          style={{
-            padding: "0.35rem 0.9rem",
-            borderRadius: "999px",
-            border: "1px solid #ddd",
-            background: "white",
-            cursor: "pointer",
-          }}
-        >
-          Logout
-        </button>
-      </div>
-
-      {/* This line stays in HEADER under login/logout */}
-      <p
+  if (!user) {
+    return (
+      <button
+        type="button"
+        onClick={handleLogin}
+        disabled={sending}
         style={{
-          fontSize: "0.8rem",
-          fontStyle: "italic",
-          opacity: 0.8,
+          padding: "0.4rem 1rem",
+          borderRadius: "999px",
+          border: "1px solid #111827",
+          background: "#ffffff",
+          fontSize: "0.9rem",
+          cursor: "pointer",
+          whiteSpace: "nowrap",
         }}
       >
-        *Login to unlock Journal & WhatsApp Nutritionist access.
-      </p>
+        {sending ? "Sending link…" : "Login with email"}
+      </button>
+    );
+  }
 
-      {/* Status message */}
-      {message && (
-        <span style={{ fontSize: "0.8rem", opacity: 0.8 }}>{message}</span>
-      )}
+  return (
+    <div
+      style={{
+        display: "flex",
+        alignItems: "center",
+        gap: "0.5rem",
+        fontSize: "0.9rem",
+      }}
+    >
+      <span style={{ opacity: 0.9, maxWidth: "180px", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>
+        {user.email}
+      </span>
+      <button
+        type="button"
+        onClick={handleLogout}
+        style={{
+          padding: "0.35rem 0.9rem",
+          borderRadius: "999px",
+          border: "1px solid #e5e7eb",
+          background: "#f9fafb",
+          cursor: "pointer",
+          whiteSpace: "nowrap",
+        }}
+      >
+        Logout
+      </button>
     </div>
   );
 }
+
+
+

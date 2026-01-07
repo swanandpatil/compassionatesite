@@ -1,81 +1,40 @@
-import { useState } from "react";
-import AuthBar from "./AuthBar";
+import { useLocation } from "react-router-dom";
 
 export default function NavBar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const location = useLocation();
 
-  const handleJournalClick = () => {
-    if (!isLoggedIn) return;
-    window.location.href = "/journal"; // change if your route is different
-  };
+  const isHomePage = location.pathname === "/";
+  const isJournalPage = location.pathname === "/journal-page";
 
-  const handleWhatsAppClick = () => {
-    if (!isLoggedIn) return;
-    window.open("https://wa.me/91XXXXXXXXXX", "_blank"); // put your real link
-  };
+  const shouldCenterLogo = isHomePage || isJournalPage;
 
   return (
     <nav
       style={{
+        height: "80px",
+        borderBottom: "1px solid #eee",
         display: "flex",
         alignItems: "center",
-        justifyContent: "space-between",
-        padding: "0.75rem 1.5rem",
-        borderBottom: "1px solid #eee",
-        gap: "1rem",
+        justifyContent: shouldCenterLogo ? "center" : "flex-start",
+        padding: "0 20px",
+        position: "absolute",
+        top: "0",
+        left: "0",
+        right: "0",
+        backgroundColor: "white",
+        zIndex: "1000",
       }}
     >
-      {/* Left: title */}
-      <div style={{ fontWeight: 600, fontSize: "1rem" }}>
-        The Compassionate Journal – Vegan Living Edition
-      </div>
-
-      {/* Right: Auth + buttons */}
-      <div
+      <img
+        src="compassionate-logo.png"
+        alt="Brand Logo"
         style={{
-          display: "flex",
-          alignItems: "center",
-          gap: "0.75rem",
-          flexWrap: "wrap",
-          justifyContent: "flex-end",
+          height: "2.5in",
+          maxHeight: "80px",
+          width: "auto",
+          filter: "contrast(1.1) brightness(1.05)",
         }}
-      >
-        <AuthBar onAuthChange={setIsLoggedIn} />
-
-        <button
-          onClick={handleJournalClick}
-          disabled={!isLoggedIn}
-          style={{
-            padding: "0.35rem 0.9rem",
-            borderRadius: "999px",
-            border: "none",
-            background: isLoggedIn ? "black" : "#ccc",
-            color: "white",
-            cursor: isLoggedIn ? "pointer" : "not-allowed",
-            opacity: isLoggedIn ? 1 : 0.6,
-            whiteSpace: "nowrap",
-          }}
-        >
-          Open Journal
-        </button>
-
-        <button
-          onClick={handleWhatsAppClick}
-          disabled={!isLoggedIn}
-          style={{
-            padding: "0.35rem 0.9rem",
-            borderRadius: "999px",
-            border: "none",
-            background: isLoggedIn ? "black" : "#ccc",
-            color: "white",
-            cursor: isLoggedIn ? "pointer" : "not-allowed",
-            opacity: isLoggedIn ? 1 : 0.6,
-            whiteSpace: "nowrap",
-          }}
-        >
-          WhatsApp Nutritionist
-        </button>
-      </div>
+      />
     </nav>
   );
 }

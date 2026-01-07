@@ -26,18 +26,35 @@
 //   return <JournalPage />;
 // }
 // src/pages/Journal.jsx
+// src/pages/Journal.jsx
 import { useAuth } from "../AuthContext";
-import JournalPage from "../JournalPage";
+import JournalPage from "./JournalPage"; // ✅ make sure path is correct
 import { Navigate } from "react-router-dom";
 
 export default function Journal() {
-  const { user } = useAuth();
+  const { user, loading } = useAuth();
 
-  // If NOT logged in → redirect to login
-  if (!user) {
-    return <Navigate to="/login" replace />;
+  // While checking auth state
+  if (loading) {
+    return (
+      <main
+        style={{
+          maxWidth: "800px",
+          margin: "0 auto",
+          padding: "3rem 1.5rem",
+          textAlign: "center",
+        }}
+      >
+        <p>Checking your session…</p>
+      </main>
+    );
   }
 
-  // Logged in → show JournalPage
+  // If NOT logged in → redirect to home (login lives there)
+  if (!user) {
+    return <Navigate to="/" replace />;
+  }
+
+  // If logged in → show the actual journal UI
   return <JournalPage />;
 }
