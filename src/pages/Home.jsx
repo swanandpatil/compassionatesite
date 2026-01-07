@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 
 export default function Home() {
   return (
-    <div
+    <div 
+  className="hero-wrapper"
       style={{
         minHeight: "calc(100vh - 80px)", // Adjust for navbar height
         background: "#fff7e0",
@@ -13,6 +14,8 @@ export default function Home() {
         justifyContent: "center",
         padding: "2rem 1.5rem",
         fontFamily: "Georgia, serif",
+        position: "relative",
+        top: "-2in",   // ✅ moves everything up together
       }}
     >
       <div
@@ -75,7 +78,7 @@ export default function Home() {
           </p>
 
           {/* CTA Button */}
-         <Link to="/journal-page" style={{ textDecoration: "none" }}>
+        <Link to="/journal" style={{ textDecoration: "none" }}>
   <button
     className="login-btn"
     style={{
