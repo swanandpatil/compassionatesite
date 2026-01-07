@@ -34,6 +34,14 @@ export default function JournalPage() {
     setIsSubmitted(true);
   };
 
+  const handleLogout = () => {
+    setIsUnlocked(false);
+    setIsSubmitted(false);
+    setEntry("");
+    localStorage.removeItem("journal_email");
+    window.location.href = "/";
+  };
+
   return (
     <div
       style={{
@@ -159,6 +167,22 @@ export default function JournalPage() {
             <p style={{ fontSize: "0.9rem", fontWeight: "bold" }}>
               करुणा से जिएँ
             </p>
+            <button
+              onClick={handleLogout}
+              style={{
+                marginTop: "2rem",
+                background: "transparent",
+                border: "none",
+                color: "#695099",
+                textDecoration: "underline",
+                cursor: "pointer",
+                fontSize: "0.9rem",
+                fontFamily: "inherit",
+                opacity: 0.8,
+              }}
+            >
+              Logout
+            </button>
           </div>
         )}
       </div>
