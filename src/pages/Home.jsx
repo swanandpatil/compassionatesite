@@ -15,7 +15,7 @@ export default function Home() {
         padding: "2rem 1.5rem",
         fontFamily: "Georgia, serif",
         position: "relative",
-        top: "-2in",   // ✅ moves everything up together
+         // ✅ moves everything up together
       }}
     >
       <div
