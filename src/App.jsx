@@ -1,9 +1,7 @@
-import { useEffect, useState } from "react";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 
 import NavBar from "./Navbar";
 import Home from "./pages/Home";
-import Journal from "./pages/Journal";
 import JournalPage from "./pages/JournalPage";
 import Day1Page from "./pages/Day1Page";
 import "./App.css";
@@ -28,11 +26,16 @@ function App() {
         <main style={{ flex: 1, paddingTop: "80px" }}>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/journal" element={<Journal />} />
-            <Route path="/journal-page" element={<JournalPage />} />
+
+            {/* Protected journal route */}
+            <Route path="/journal" element={<JournalPage />} />
+
+            {/* Day pages (can later also be protected if needed) */}
             <Route path="/day1" element={<Day1Page />} />
-            {/* /login just redirects home, where the login UI lives in the nav */}
+
+            {/* /login just redirects home, where login UI lives */}
             <Route path="/login" element={<Navigate to="/" replace />} />
+
             {/* Fallback */}
             <Route path="*" element={<Navigate to="/" replace />} />
           </Routes>
