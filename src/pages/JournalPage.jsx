@@ -158,6 +158,12 @@ export default function JournalPage() {
           </>
         ) : (
           <div style={{ textAlign: "center", marginTop: "4rem" }}>
+            <p style={{ fontWeight: "bold", fontSize: "1rem", marginBottom: "0.3rem" }}>
+              Day 1 of 14 complete 
+            </p>
+            <p style={{ fontSize: "0.95rem", opacity: 0.85, marginBottom: "1.5rem" }}>
+              Day 2 🔒 Unlocks tomorrow 
+            </p>
             <p style={{ fontSize: "1.2rem", marginBottom: "1rem" }}>
               Thank you for journaling with us.
             </p>
