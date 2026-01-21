@@ -1,0 +1,383 @@
+/* src/pages/MindPerformanceReset.css */
+
+.mpr-page {
+  padding: 28px 18px 60px;
+  max-width: 1100px;
+  margin: 0 auto;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+
+  /* ✅ sky-blue dashboard theme */
+  background: linear-gradient(180deg, rgba(224, 242, 255, 0.55), rgba(255, 255, 255, 1));
+  border-radius: 22px;
+}
+
+/* ✅ HEADER */
+.mpr-header {
+  margin-bottom: 18px;
+}
+
+.mpr-title {
+  font-size: 34px;
+  font-weight: 900;
+  margin: 0;
+  color: #111827;
+}
+
+.mpr-subtitle {
+  margin-top: 10px;
+  opacity: 0.85;
+  color: #374151;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+/* ✅ PILLS */
+.mpr-badges {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.mpr-badge {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  background: rgba(47, 92, 255, 0.08);
+  border: 1px solid rgba(47, 92, 255, 0.15);
+  font-weight: 800;
+  color: #111827;
+}
+
+/* ✅ TODAY MAIN CARD */
+.mpr-today-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+  margin-top: 18px;
+}
+
+.mpr-today-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 14px;
+  flex-wrap: wrap;
+}
+
+.mpr-today-title {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.mpr-steps {
+  margin-top: 10px;
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.mpr-step {
+  font-size: 13px;
+  font-weight: 800;
+  padding: 8px 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  color: #111827;
+}
+
+/* ✅ Buttons */
+.mpr-btn {
+  border: none;
+  cursor: pointer;
+  padding: 12px 14px;
+  border-radius: 14px;
+  font-weight: 900;
+  font-size: 14px;
+}
+
+.mpr-btn.primary {
+  background: #2f5cff;
+  color: white;
+}
+
+.mpr-btn.primary:hover {
+  opacity: 0.97;
+}
+
+.mpr-btn.danger {
+  background: rgba(0, 0, 0, 0.14);
+  color: #111827;
+}
+
+.mpr-start-btn {
+  white-space: nowrap;
+}
+
+/* ✅ Journals mini cards inside Today Reset */
+.mpr-mini-journals {
+  margin-top: 16px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.mpr-mini-card {
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+}
+
+.mpr-mini-thumb {
+  height: 110px;
+  background: rgba(47, 92, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.mpr-mini-img {
+  width: 82%;
+  height: 82%;
+  object-fit: contain;
+}
+
+.mpr-mini-body {
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.mpr-mini-title {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.mpr-mini-desc {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.8;
+  color: #374151;
+}
+
+.mpr-mini-cta {
+  margin-top: 8px;
+  display: inline-block;
+  text-decoration: none;
+  font-weight: 900;
+  padding: 10px 12px;
+  border-radius: 12px;
+  background: rgba(47, 92, 255, 0.12);
+  color: #2f5cff;
+  width: fit-content;
+}
+
+/* ✅ GENERAL SECTION CARD */
+.mpr-section {
+  margin-top: 22px;
+  padding: 18px;
+  border-radius: 20px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.06);
+}
+
+.mpr-h2 {
+  margin: 0 0 10px;
+  font-size: 18px;
+  font-weight: 900;
+  color: #111827;
+}
+
+.mpr-note {
+  opacity: 0.75;
+  margin: 8px 0 12px;
+  color: #374151;
+}
+
+/* ✅ TRACKER HEADER */
+.mpr-tracker-head {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+/* Progress */
+.mpr-progress {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 13px;
+  font-weight: 800;
+  color: #111827;
+  min-width: 220px;
+}
+
+.mpr-progressbar {
+  width: 280px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.mpr-progressbar-fill {
+  height: 100%;
+  width: 0%;
+  background: #2f5cff;
+  transition: width 0.25s ease;
+}
+
+/* ✅ DAY GRID */
+.mpr-days-grid {
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  gap: 8px;
+  margin-top: 14px;
+}
+
+.mpr-day {
+  border: none;
+  cursor: pointer;
+  padding: 10px 8px;
+  border-radius: 12px;
+  font-weight: 900;
+  font-size: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  transition: transform 0.12s ease, opacity 0.12s ease;
+}
+
+.mpr-day:hover {
+  transform: translateY(-1px);
+}
+
+.mpr-day.today {
+  outline: 3px solid rgba(47, 92, 255, 0.25);
+}
+
+.mpr-day.done {
+  background: rgba(47, 92, 255, 0.12);
+  border-color: rgba(47, 92, 255, 0.3);
+}
+
+.mpr-day.locked {
+  cursor: not-allowed;
+  opacity: 0.55;
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.mpr-day.locked:hover {
+  transform: none;
+}
+
+/* ✅ ACTION BUTTONS */
+.mpr-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-top: 16px;
+}
+
+/* ✅ ANALYTICS */
+.mpr-benefit-chips {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-bottom: 14px;
+}
+
+.mpr-chip {
+  padding: 8px 12px;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  background: rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(0, 0, 0, 0.06);
+}
+
+.mpr-analytics-grid {
+  display: grid;
+  gap: 10px;
+}
+
+.mpr-analytics-row {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 10px;
+  padding: 14px;
+  border-radius: 16px;
+  background: rgba(47, 92, 255, 0.05);
+  border: 1px solid rgba(47, 92, 255, 0.12);
+}
+
+.mpr-analytics-label {
+  font-weight: 900;
+  color: #111827;
+}
+
+.mpr-analytics-col {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  align-items: center;
+}
+
+.mpr-analytics-tag {
+  font-size: 12px;
+  font-weight: 900;
+  opacity: 0.65;
+  color: #111827;
+}
+
+.mpr-score {
+  font-weight: 900;
+  color: #111827;
+}
+
+.mpr-score.strong {
+  color: #2f5cff;
+}
+
+/* ✅ RESPONSIVE */
+@media (max-width: 900px) {
+  .mpr-mini-journals {
+    grid-template-columns: 1fr;
+  }
+
+  .mpr-days-grid {
+    grid-template-columns: repeat(6, 1fr);
+  }
+
+  .mpr-progressbar {
+    width: 240px;
+  }
+}
+
+@media (max-width: 500px) {
+  .mpr-days-grid {
+    grid-template-columns: repeat(5, 1fr);
+  }
+
+  .mpr-analytics-row {
+    grid-template-columns: 1fr;
+  }
+
+  .mpr-progressbar {
+    width: 100%;
+  }
+}

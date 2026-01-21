@@ -46,7 +46,7 @@ export default function JournalPage() {
     <div
       style={{
         minHeight: "100vh",
-        backgroundColor: "#f3e7f1",
+        backgroundColor: "#F6F3FF",
         fontFamily: "Georgia, serif",
         display: "flex",
         flexDirection: "column",

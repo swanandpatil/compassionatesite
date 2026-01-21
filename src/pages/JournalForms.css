@@ -1,0 +1,165 @@
+/* src/pages/JournalForms.css */
+.journal-page {
+  min-height: 100vh;
+  background-color: #F6F3FF;
+  padding: 40px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  font-family: system-ui, -apple-system, sans-serif;
+}
+
+.journal-container {
+  width: 100%;
+  max-width: 700px;
+  background: rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(12px);
+  border-radius: 24px;
+  padding: 40px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+}
+
+.journal-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.journal-title {
+  font-family: 'Georgia', serif;
+  font-size: 2.5rem;
+  color: #111827;
+  margin: 0 0 8px 0;
+  font-weight: 800;
+}
+
+.journal-subtitle {
+  color: #6B7280;
+  font-size: 1.05rem;
+  line-height: 1.5;
+}
+
+.journal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-group label {
+  font-weight: 600;
+  color: #374151;
+  font-size: 0.95rem;
+}
+
+.form-input,
+.form-textarea {
+  padding: 14px 16px;
+  border-radius: 12px;
+  border: 1px solid #E5E7EB;
+  background: #fff;
+  font-size: 1rem;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.form-input:focus,
+.form-textarea:focus {
+  outline: none;
+  border-color: #695099;
+  box-shadow: 0 0 0 3px rgba(105, 80, 153, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 100px;
+  line-height: 1.5;
+}
+
+.multi-input-group {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.form-actions {
+  margin-top: 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.back-link {
+  color: #6B7280;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: color 0.2s;
+}
+
+.back-link:hover {
+  color: #111827;
+}
+
+.save-btn {
+  background-color: #695099;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  border-radius: 50px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  box-shadow: 0 4px 12px rgba(105, 80, 153, 0.25);
+  transition: all 0.2s ease;
+}
+
+.save-btn:hover {
+  background-color: #584282;
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(105, 80, 153, 0.35);
+}
+
+/* Toast Notification */
+.toast {
+  position: fixed;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: #10B981;
+  color: white;
+  padding: 10px 24px;
+  border-radius: 50px;
+  font-weight: 600;
+  box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+  animation: fadeInOut 2.5s ease forwards;
+  z-index: 100;
+}
+
+@keyframes fadeInOut {
+  0% { opacity: 0; transform: translate(-50%, 20px); }
+  15% { opacity: 1; transform: translate(-50%, 0); }
+  85% { opacity: 1; transform: translate(-50%, 0); }
+  100% { opacity: 0; transform: translate(-50%, -20px); }
+}
+
+@media (max-width: 600px) {
+  .journal-container {
+    padding: 24px;
+  }
+  .journal-title {
+    font-size: 2rem;
+  }
+  .form-actions {
+    flex-direction: column-reverse;
+    gap: 20px;
+  }
+  .save-btn {
+    width: 100%;
+  }
+}

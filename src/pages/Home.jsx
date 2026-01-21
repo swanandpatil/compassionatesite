@@ -1,116 +1,142 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 export default function Home() {
+  const [toolsOpen, setToolsOpen] = useState(false);
+
   return (
-    <div 
-  className="hero-wrapper"
-      style={{
-        minHeight: "calc(100vh - 80px)", // Adjust for navbar height
-        background: "#fff7e0",
-        display: "flex",
-        flexDirection: "column",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "2rem 1.5rem",
-        fontFamily: "Georgia, serif",
-        position: "relative",
-        top: "-0.5in",   // ✅ moves everything up together
-      }}
-    >
-      <div
-        style={{
-          maxWidth: "1120px",
-          width: "100%",
-          display: "grid",
-          gridTemplateColumns: "minmax(0, 1fr) 1.2fr",
-          gap: "3rem",
-          alignItems: "center",
-        }}
-      >
-        {/* Left section: Journal image */}
-        <div style={{ textAlign: "center" }}>
-          <img
-            src="/Journal.png"
-            alt="Journal"
-            style={{
-              width: "100%",
-              maxWidth: "350px",
-              borderRadius: "24px",
-              boxShadow: "0 18px 40px hsla(0, 0%, 0%, 0.12)",
-            }}
-          />
+    <div className="homePage">
+      <div className="homeGrid">
+        {/* LEFT COLUMN: Journal cards */}
+        <div className="leftColumn">
+          <div className="cardsContainer">
+            {/* Clarity Journal */}
+            <div className="journalCard">
+              <img
+                src="/Journal.png"
+                alt="Clarity Journal"
+                className="cardImg"
+              />
+              <Link to="/clarity" className="cardBtn">
+                Begin Quick Clarity
+              </Link>
+            </div>
+
+            {/* Day Journal */}
+            <div className="journalCard">
+              <img
+                src="/DayJournal.png"
+                alt="Day Journal"
+                className="cardImg"
+              />
+              <Link to="/day-journal" className="cardBtn">
+                Begin Day Journal
+              </Link>
+            </div>
+
+            {/* Evening Reflection */}
+            <div className="journalCard">
+              <img
+                src="/EveningJournal.png"
+                alt="Evening Reflection"
+                className="cardImg"
+              />
+              <Link to="/evening-journal" className="cardBtn">
+                Begin Evening Reflection
+              </Link>
+            </div>
+          </div>
         </div>
 
-        {/* Right section: Hero content */}
-        <div style={{ textAlign: "left" }}>
-          {/* Hero Heading */}
-          <h1
-            style={{
-              fontSize: "3.2rem",
-              lineHeight: 1.1,
-              marginBottom: "1.5rem",
-              fontWeight: 400,
-              color: "#2d2a32",
-            }}
-          >
-            Start 2026
-            <br />
-            with Clarity
-            <br />
-            and Calm
-          </h1>
+        {/* RIGHT COLUMN */}
+        <div className="rightContent">
+          <h1 className="mainTitle">Start 2026 with Clarity & Calm</h1>
 
-          {/* Subtitle */}
-          <p
-            style={{
-              fontSize: "1.25rem",
-              lineHeight: 1.6,
-              marginBottom: "2.5rem",
-              color: "#5b5663",
-              fontStyle: "italic",
-              opacity: 0.9,
-            }}
-          >
-            3–4 minutes for daily reflection
-            <br />
-            14 days of guided journaling
+          <p className="subText">
+            A gentle journaling space to slow down, reflect, and build calm
+            consistency — one day at a time.
           </p>
 
-          {/* CTA Button */}
-        <Link to="/journal" style={{ textDecoration: "none" }}>
-  <button
-    className="login-btn"
-    style={{
-      width: "auto",
-      padding: "0.9rem 2.2rem",
-      fontSize: "1.05rem",
-      borderRadius: "50px",
-      marginBottom: "3.5rem",
-      background: "#695099",          // ✅ purple
-      color: "white",                 // ✅ white text
-      border: "none",
-      cursor: "pointer",
-      boxShadow: "0 4px 15px rgba(109, 91, 208, 0.35)", // softer purple shadow
-    }}
-  >
-    Let’s Begin Day 1
-  </button>
-</Link>
+          {/* Mascot + Speech Bubble */}
+          <div className="mascotWrapper">
+            <img src="/mascot.png" alt="Mascot" className="mascotImgLarge" />
 
-          {/* Brand Block – visible without scroll */}
-          <div
-            style={{
-              fontSize: "0.9rem",
-              color: "rgba(91, 86, 99, 0.75)",
-              lineHeight: 1.6,
-            }}
-          >
-            <p style={{ margin: 0 }}>Crafted in India</p>
-            <p style={{ margin: 0 }}>with compassion for the world</p>
-            <p style={{ margin: "0.3rem 0 0 0", fontWeight: 500 }}>
-              करुणा से जिएँ
-            </p>
+            <div className="speechBubble">
+              <h3 className="bubbleTitle">
+                Wanna join the 30-Day Productivity Reset Challenge?
+              </h3>
+              <p className="bubbleSub">Get all your goals achieved in 2026.</p>
+
+              <Link to="/mind-performance-reset" className="bubbleCta">
+                Start Here
+              </Link>
+            </div>
+          </div>
+
+          {/* ✅ Footer Row (More tools on LEFT of safety note) */}
+          <div className="homeFooterRow">
+            {/* ✅ More Tools dropdown overlay button */}
+            <div
+              className="moreToolsWrap"
+              onMouseEnter={() => setToolsOpen(true)}
+              onMouseLeave={() => setToolsOpen(false)}
+            >
+              <button className="moreToolsBtn">
+                More Tools <span className="moreToolsArrow">▾</span>
+              </button>
+
+              {toolsOpen && (
+                <div className="toolsDropdown">
+                  {/* Vision Achievement */}
+                  <div className="toolsItem disabled" title="Coming soon">
+                    <span className="toolsIcon">🎯</span>
+                    <div className="toolsText">
+                      <div className="toolsName">
+                        Vision Achievement{" "}
+                        <span className="toolsBadge soon">Soon</span>
+                      </div>
+                      <div className="toolsDesc">
+                        Turn vision into action plans
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Healing */}
+                  <div className="toolsItem disabled" title="Coming soon">
+                    <span className="toolsIcon">💙</span>
+                    <div className="toolsText">
+                      <div className="toolsName">
+                        Healing <span className="toolsBadge soon">Soon</span>
+                      </div>
+                      <div className="toolsDesc">
+                        Heal emotionally with guided journaling
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* De-addiction */}
+                  <div className="toolsItem disabled" title="Coming soon">
+                    <span className="toolsIcon">🚫</span>
+                    <div className="toolsText">
+                      <div className="toolsName">
+                        De-addiction <span className="toolsBadge soon">Soon</span>
+                      </div>
+                      <div className="toolsDesc">
+                        Track streaks & reduce bad habits
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* ✅ Safety Note (Right side) */}
+            <div className="safetyNote">
+              <p>Your data stays safe — saved locally on your own device.</p>
+              <p>Made with compassion for the world.</p>
+              <p className="hindiText">करुणा से जिए</p>
+            </div>
           </div>
         </div>
       </div>
