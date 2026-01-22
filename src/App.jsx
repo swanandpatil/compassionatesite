@@ -16,20 +16,13 @@ import AuthListener from "./AuthListener";
 function App() {
   return (
     <BrowserRouter>
-      <div
-        style={{
-          minHeight: "100vh",
-          backgroundColor: "#F6F3FF",
-          display: "flex",
-          flexDirection: "column",
-        }}
-      >
+      <div className="h-screen w-screen overflow-hidden flex flex-col bg-[#F6F3FF]">
         {/* Keeps localStorage auth-user-id in sync with Supabase auth */}
         <AuthListener />
 
         <NavBar />
 
-        <main style={{ flex: 1, paddingTop: "80px" }}>
+        <main className="flex-1 overflow-hidden pt-20 relative">
           <Routes>
             <Route path="/" element={<Home />} />
 

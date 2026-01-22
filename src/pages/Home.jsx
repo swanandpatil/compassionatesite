@@ -13,11 +13,7 @@ export default function Home() {
           <div className="cardsContainer">
             {/* Clarity Journal */}
             <div className="journalCard">
-              <img
-                src="/Journal.png"
-                alt="Clarity Journal"
-                className="cardImg"
-              />
+              <img src="/Journal.png" alt="Clarity Journal" className="cardImg" />
               <Link to="/clarity" className="cardBtn">
                 Begin Quick Clarity
               </Link>
@@ -74,9 +70,9 @@ export default function Home() {
             </div>
           </div>
 
-          {/* ✅ Footer Row (More tools on LEFT of safety note) */}
+          {/* Footer Row */}
           <div className="homeFooterRow">
-            {/* ✅ More Tools dropdown overlay button */}
+            {/* More Tools dropdown overlay button */}
             <div
               className="moreToolsWrap"
               onMouseEnter={() => setToolsOpen(true)}
@@ -120,7 +116,8 @@ export default function Home() {
                     <span className="toolsIcon">🚫</span>
                     <div className="toolsText">
                       <div className="toolsName">
-                        De-addiction <span className="toolsBadge soon">Soon</span>
+                        De-addiction{" "}
+                        <span className="toolsBadge soon">Soon</span>
                       </div>
                       <div className="toolsDesc">
                         Track streaks & reduce bad habits
@@ -131,7 +128,7 @@ export default function Home() {
               )}
             </div>
 
-            {/* ✅ Safety Note (Right side) */}
+            {/* Safety Note */}
             <div className="safetyNote">
               <p>Your data stays safe — saved locally on your own device.</p>
               <p>Made with compassion for the world.</p>
