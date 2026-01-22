@@ -1,7 +1,4 @@
 import { useLocation } from "react-router-dom";
-import mascotanalytical from "../public/mascotanalytical.png";
-
-
 
 export default function NavBar() {
   const location = useLocation();
@@ -42,9 +39,7 @@ export default function NavBar() {
         alt="Brand Logo"
         style={{
           height: "102px",
-          width: "180px", // ✅ make it more readable
-          // maxWidth: "85vw",
-          // objectFit: "contain",
+          width: "180px",
           filter: "contrast(1.25) brightness(1.08) saturate(1.05)",
         }}
       />
@@ -54,7 +49,7 @@ export default function NavBar() {
         <div style={{ width: "70px" }} />
       ) : showResetMascot ? (
         <img
-          src= {mascotanalytical}
+          src="/mascotanalytical.png"   // ✅ correct way from public/
           alt="Analytical Mascot"
           style={{
             width: "180px",
