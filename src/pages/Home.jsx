@@ -13,7 +13,13 @@ export default function Home() {
           <div className="cardsContainer">
             {/* Clarity Journal */}
             <div className="journalCard">
-              <img src="/Journal.png" alt="Clarity Journal" className="cardImg" />
+              <div className="cardImgWrap">
+                <img
+                  src="/Journal.png"
+                  alt="Clarity Journal"
+                  className="cardImg"
+                />
+              </div>
               <Link to="/clarity" className="cardBtn">
                 Begin Quick Clarity
               </Link>
@@ -21,11 +27,13 @@ export default function Home() {
 
             {/* Day Journal */}
             <div className="journalCard">
-              <img
-                src="/DayJournal.png"
-                alt="Day Journal"
-                className="cardImg"
-              />
+              <div className="cardImgWrap">
+                <img
+                  src="/DayJournal.png"
+                  alt="Day Journal"
+                  className="cardImg"
+                />
+              </div>
               <Link to="/day-journal" className="cardBtn">
                 Begin Day Journal
               </Link>
@@ -33,11 +41,13 @@ export default function Home() {
 
             {/* Evening Reflection */}
             <div className="journalCard">
-              <img
-                src="/EveningJournal.png"
-                alt="Evening Reflection"
-                className="cardImg"
-              />
+              <div className="cardImgWrap">
+                <img
+                  src="/EveningJournal.png"
+                  alt="Evening Reflection"
+                  className="cardImg"
+                />
+              </div>
               <Link to="/evening-journal" className="cardBtn">
                 Begin Evening Reflection
               </Link>

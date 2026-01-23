@@ -1,94 +1,157 @@
+import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
+import "./JournalForms.css";
 
-const clarityText = document.getElementById("clarityText");
-const saveBtn = document.getElementById("saveBtn");
-const clearBtn = document.getElementById("clearBtn");
-const entriesDiv = document.getElementById("entries");
-const deleteAllBtn = document.getElementById("deleteAllBtn");
-const openAppLink = document.getElementById("openAppLink");
-
-// ✅ Replace this with your actual Vercel URL
-const APP_URL = "https://YOUR-VERCEL-LINK.vercel.app/";
-openAppLink.href = APP_URL;
-
-function formatTime(ts) {
-  const d = new Date(ts);
-  return d.toLocaleString();
-}
-
-function loadEntries() {
-  chrome.storage.local.get(["clarityEntries"], (res) => {
-    const entries = res.clarityEntries || [];
-    renderEntries(entries);
+export default function DayJournal() {
+  const [date, setDate] = useState(new Date().toISOString().slice(0, 10));
+  const [showToast, setShowToast] = useState(false);
+  
+  const [formData, setFormData] = useState({
+    feeling: "",
+    priority1: "",
+    priority2: "",
+    priority3: "",
+    kindAct: "",
+    notes: ""
   });
-}
 
-function renderEntries(entries) {
-  entriesDiv.innerHTML = "";
+  // Load data when date changes
+  useEffect(() => {
+    const savedData = localStorage.getItem("dayJournalEntries");
+    if (savedData) {
+      const parsed = JSON.parse(savedData);
+      if (parsed[date]) {
+        setFormData(parsed[date]);
+      } else {
+        // Reset form if no entry for this date
+        setFormData({
+          feeling: "",
+          priority1: "",
+          priority2: "",
+          priority3: "",
+          kindAct: "",
+          notes: ""
+        });
+      }
+    }
+  }, [date]);
 
-  if (entries.length === 0) {
-    entriesDiv.innerHTML = `<div class="entry"><div class="entryText">No entries yet.</div></div>`;
-    return;
-  }
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({ ...prev, [name]: value }));
+  };
 
-  entries.forEach((item) => {
-    const box = document.createElement("div");
-    box.className = "entry";
+  const handleSave = (e) => {
+    e.preventDefault();
+    
+    const savedData = JSON.parse(localStorage.getItem("dayJournalEntries") || "{}");
+    savedData[date] = formData;
+    localStorage.setItem("dayJournalEntries", JSON.stringify(savedData));
 
-    box.innerHTML = `
-      <div class="entryTop">
-        <span class="time">${formatTime(item.ts)}</span>
-        <button class="delOne" data-id="${item.id}">Delete</button>
+    setShowToast(true);
+    setTimeout(() => setShowToast(false), 3000);
+  };
+
+  return (
+    <div className="journal-page">
+      <div className="journal-container">
+        <header className="journal-header">
+          <h1 className="journal-title">Day Journal</h1>
+          <p className="journal-subtitle">
+            Set your intention. Stay calm. Build consistency — one day at a time.
+          </p>
+        </header>
+
+        <form className="journal-form" onSubmit={handleSave}>
+          {/* Date Picker */}
+          <div className="form-group">
+            <label>Date</label>
+            <input 
+              type="date" 
+              className="form-input"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              required
+            />
+          </div>
+
+          {/* Feeling */}
+          <div className="form-group">
+            <label>Today I want to feel...</label>
+            <input 
+              type="text" 
+              name="feeling"
+              className="form-input"
+              placeholder="Calm, focused, energetic..."
+              value={formData.feeling}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Priorities */}
+          <div className="form-group">
+            <label>Top 3 Priorities</label>
+            <div className="multi-input-group">
+              <input 
+                type="text" 
+                name="priority1"
+                className="form-input"
+                placeholder="1."
+                value={formData.priority1}
+                onChange={handleChange}
+              />
+              <input 
+                type="text" 
+                name="priority2"
+                className="form-input"
+                placeholder="2."
+                value={formData.priority2}
+                onChange={handleChange}
+              />
+              <input 
+                type="text" 
+                name="priority3"
+                className="form-input"
+                placeholder="3."
+                value={formData.priority3}
+                onChange={handleChange}
+              />
+            </div>
+          </div>
+
+          {/* Kind Act */}
+          <div className="form-group">
+            <label>One kind act I will do today</label>
+            <input 
+              type="text" 
+              name="kindAct"
+              className="form-input"
+              placeholder="Send a nice text, help a colleague..."
+              value={formData.kindAct}
+              onChange={handleChange}
+            />
+          </div>
+
+          {/* Notes */}
+          <div className="form-group">
+            <label>Notes / Thoughts</label>
+            <textarea 
+              name="notes"
+              className="form-textarea"
+              placeholder="Anything else on your mind..."
+              value={formData.notes}
+              onChange={handleChange}
+            />
+          </div>
+
+          <div className="form-actions">
+            <Link to="/" className="back-link">← Back to Home</Link>
+            <button type="submit" className="save-btn">Save Entry</button>
+          </div>
+        </form>
       </div>
-      <div class="entryText"></div>
-    `;
 
-    box.querySelector(".entryText").textContent = item.text;
-
-    box.querySelector(".delOne").addEventListener("click", () => {
-      deleteOne(item.id);
-    });
-
-    entriesDiv.appendChild(box);
-  });
+      {showToast && <div className="toast">Saved ✅</div>}
+    </div>
+  );
 }
-
-function saveEntry(text) {
-  chrome.storage.local.get(["clarityEntries"], (res) => {
-    const prev = res.clarityEntries || [];
-    const entry = { id: crypto.randomUUID(), ts: Date.now(), text };
-
-    const next = [entry, ...prev].slice(0, 30);
-    chrome.storage.local.set({ clarityEntries: next }, () => {
-      clarityText.value = "";
-      loadEntries();
-    });
-  });
-}
-
-function deleteOne(id) {
-  chrome.storage.local.get(["clarityEntries"], (res) => {
-    const prev = res.clarityEntries || [];
-    const next = prev.filter((x) => x.id !== id);
-    chrome.storage.local.set({ clarityEntries: next }, loadEntries);
-  });
-}
-
-function deleteAll() {
-  chrome.storage.local.set({ clarityEntries: [] }, loadEntries);
-}
-
-saveBtn.addEventListener("click", () => {
-  const text = clarityText.value.trim();
-  if (!text) return;
-  saveEntry(text);
-});
-
-clearBtn.addEventListener("click", () => {
-  clarityText.value = "";
-});
-
-deleteAllBtn.addEventListener("click", () => {
-  deleteAll();
-});
-
-loadEntries();
